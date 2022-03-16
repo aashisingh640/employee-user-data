@@ -1,0 +1,70 @@
+// import ag-grid table css and themes
+@import "ag-grid-community/dist/styles/ag-grid.css";
+@import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+
+// import bootstrap css and its icons
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+// Primary Font Stack
+$font-family: 'Open Sans', sans-serif;
+
+// Colors
+$colors: (
+    red: #FF555F,
+    sky: #25A5BD,
+    sky-light: #E8F6FD,
+    grey: #333C43,
+    light-grey: #e6e7e9,
+    dark-grey: #9DA19B,
+    white: #ffffff,
+    black: #1D1E22,
+    box-shadow-grey: #ddd,
+    search-background-grey: #f8f8f8,
+);
+
+// Font Sizes
+$f-size: (
+    h1: 3rem,
+    h2: 1.125rem,
+    h3: 1.025rem,
+    h4: 14px,
+    h5: 1rem,
+    f8: 8px,
+    f10: 10px,
+    f13: 13px,
+    f12: 12px, 
+    f16: 1rem, 
+    f18: 18px,
+    f15: 15px,
+    f20: 20px,
+    f22: 22px,
+    f24: 24px
+);
+
+body {
+    font-family: $font-family;
+    background-color:map-get($map: $colors, $key: light-grey);
+    font-size: map-get($map: $f-size, $key: f16);
+    color: map-get($map: $colors, $key: black);
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
+    position: relative;
+    padding: 1rem;
+}
+
+// overriding ag-grid themes
+.ag-theme-alpine .ag-pinned-right-header,
+.ag-pinned-right-cols-container {
+    box-shadow: -2px -8px 10px 0px map-get($map: $colors, $key: box-shadow-grey);
+}
+
+.ag-pinned-left-cols-container,
+.ag-theme-alpine .ag-pinned-left-header {
+    box-shadow: 2px -8px 10px 0px map-get($map: $colors, $key: box-shadow-grey);
+    z-index: 1;
+}
+
+:host::ng-deep .invalid-data {
+    border: 1px solid map-get($map: $colors, $key: red) !important;
+}
