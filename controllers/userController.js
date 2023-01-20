@@ -21,7 +21,7 @@ function getAllUsers(req, res, next) {
 
             response.on('data', d => {
                 string += d;
-            }).on('end', () => {
+            }).on('end', async () => {
                 const users = JSON.parse(string) || [];
 
                 let invalid = false;

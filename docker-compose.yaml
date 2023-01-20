@@ -1,0 +1,45 @@
+services:
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfileserver
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - client
+    environment:
+      DB_PASSWORD: postgres
+      DB_USER: postgres
+      DB_NAME: user-data
+      DB_HOST: db
+    entrypoint:
+    - /usr/local/bin/docker-entrypoint.sh
+  client:
+    build:
+      context: ./
+      dockerfile: Dockerfileclient
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: always
+    ports:
+      - "4200:4200"
+  db:
+    image: postgres:9.6-alpine
+    restart: always
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: user-data
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
+    driver: local
